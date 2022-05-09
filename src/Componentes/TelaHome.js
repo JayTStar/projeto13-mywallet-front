@@ -49,8 +49,8 @@ export default function TelaHome(){
         <Pagina>
             <Topo><p>Olá, {usuario}</p> <ion-icon name="exit-outline"></ion-icon></Topo>
             <Registros>
-                {mov.map(elemento => {return (elemento.tipo === 'entrada') ? <Positivo><span>{elemento.titulo}</span> {elemento.valor}</Positivo> : <Negativo><span>{elemento.titulo}</span> {elemento.valor}</Negativo>})}
-                <Saldo><span>Saldo:</span>  {soma}</Saldo>
+                {mov.map(elemento => {return (elemento.tipo === 'entrada') ? <Positivo><span>{elemento.titulo}</span> {parseFloat(elemento.valor).toFixed(2).replace(".", ",")}</Positivo> : <Negativo><span>{elemento.titulo}</span> {parseFloat(elemento.valor).toFixed(2).replace(".", ",")}</Negativo>})}
+                <Saldo><span>Saldo:</span>  {parseFloat(soma).toFixed(2).replace(".", ",")}</Saldo>
             </Registros>
             <Base>
                 <Entrada onClick={() => {navigate("/entrada")}}><ion-icon name="add-circle-outline"></ion-icon> <p>Nova Entrada</p></Entrada>
@@ -107,6 +107,7 @@ const Registros = styled.div`
     padding: 3%;
 
     position: relative;
+    
 `
 const Positivo = styled.p`
     width: 100%;
@@ -116,6 +117,10 @@ const Positivo = styled.p`
     justify-content: space-between;
 
     color: green;
+
+    box-sizing: border-box;
+
+    margin: 5% 0;
 
     span{
         color: black;
@@ -130,19 +135,24 @@ const Negativo = styled.p`
 
     color: red;
 
+    box-sizing: border-box;
+
+    margin: 5% 0;
+
     span{
         color: black;
     }
 `
 const Saldo = styled.p`
-    width: 100%;
+    width: 92%;
     height: auto;
 
     display:flex;
     justify-content: space-between;
 
     position: absolute;
-    bottom:0;
+    bottom:3%;
+    left:3%
 `
 const Base = styled.div`
     width 100%;
